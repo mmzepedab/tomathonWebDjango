@@ -1,0 +1,31 @@
+{% extends "rank/base.html" %}
+
+{% block content %}
+    <h2>Content for Ranks</h2>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Frist Name</th>
+            <th>Last Name</th>
+        </tr> </thead>
+        <tbody>
+
+
+        {% for rank in ranks %}
+
+            <tr>
+            <th scope="row">{{ rank.username }}</th>
+            <td>{{ rank.email }}</td>
+            <td>{{ rank.first_name }}</td>
+            <td>{{ rank.last_name }}</td>
+            </tr>
+
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock content %}

@@ -1,0 +1,34 @@
+{% extends "game/base.html" %}
+
+{% block content %}
+    <h2>Content for My Game App</h2>
+
+    <canvas id="gameCanvas" width="800" height="450"></canvas>
+    <script type="text/javascript" src="/static/game/js/cocos2d-js-v3.12.js" charset="UTF-8"></script>
+    <script type="text/javascript">
+          window.onload = function(){
+              cc.game.onStart = function(){
+                  //load resources
+                  cc.LoaderScene.preload(["/static/game/images/HelloWorld.png"], function () {
+                      var MyScene = cc.Scene.extend({
+                          onEnter:function () {
+                              this._super();
+                              var size = cc.director.getWinSize();
+                              var sprite = cc.Sprite.create("/static/game/images/HelloWorld.png");
+                              sprite.setPosition(size.width / 2, size.height / 2);
+                              sprite.setScale(0.8);
+                              this.addChild(sprite, 0);
+
+                              var label = cc.LabelTTF.create("Hello World", "Arial", 40);
+                              label.setPosition(size.width / 2, size.height / 2);
+                              this.addChild(label, 1);
+                          }
+                      });
+                      cc.director.runScene(new MyScene());
+                  }, this);
+              };
+              cc.game.run("gameCanvas");
+          };
+    </script>
+
+{% endblock content %}

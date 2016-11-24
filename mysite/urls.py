@@ -15,9 +15,44 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from polls.views import index
+from game.views import index
+from rank.views import rankList, ranks
+
+from rest_framework import routers
+from quickstart import views
+from rank import views
+
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import ensure_csrf_cookie
+
+router = routers.DefaultRouter()
+#router.register(r'users', views.UserViewSet)
+#router.register(r'groups', views.GroupViewSet)
+#router.register(r'api/rank', ensure_csrf_cookie(views.RankViewSet))
+router.register(r'rank', views.RankViewSet)
+
+#from rest_framework import routers, serializers, viewsets
+
+# Serializers define the API representation.
+#class RankSerializer(serializers.HyperlinkedModelSerializer):
+#    class Meta:
+#        model = Rank
+#        fields = ('usernam', 'email', 'first_name', 'last_name')
+
+
+# ViewSets define the view behavior.
+#class RankViewSet(viewsets.ModelViewSet):
+#    queryset = Rank.objects.all()
+#    serializer_class = RankSerializer
+
+#router = routers.DefaultRouter()
+#router.register(r'rank', RankViewSet)
 
 urlpatterns = [
-    url(r'^$', index),
+    #url(r'^$', index),
+    url(r'^rank/', rankList),
+    url(r'^ranks/', ranks),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^api/', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
